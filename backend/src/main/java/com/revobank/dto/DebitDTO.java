@@ -1,22 +1,20 @@
 package com.revobank.dto;
 
-import java.time.LocalDate;
-
-import com.revobank.model.Account;
+import java.time.Instant;
 
 public class DebitDTO {
 
-	public Double amount;
-	public LocalDate createdAt;	
-	public Account account;		
+	private Double amount;
+	private Instant createdAt;		
+	private Long accountId;		
 
 	public DebitDTO() {		
 	}
 
-	public DebitDTO(Double amount, LocalDate createdAt, Account account) {
+	public DebitDTO(Double amount, Long accountId) {
 		this.amount = amount;
-		this.createdAt = createdAt;
-		this.account = account;
+		this.createdAt = Instant.now();
+		this.accountId = accountId;
 	}
 
 	public Double getAmount() {
@@ -27,20 +25,20 @@ public class DebitDTO {
 		this.amount = amount;
 	}
 
-	public LocalDate getCreatedAt() {
+	public Instant getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDate createdAt) {
+	public void setCreatedAt(Instant createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public Account getAccount() {
-		return account;
+	public Long getAccountId() {
+		return accountId;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
 	}
-		
+
 }

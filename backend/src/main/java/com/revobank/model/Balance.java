@@ -1,30 +1,45 @@
 package com.revobank.model;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-@Entity(name = "t_balance")
+@Entity
+@Table(name = "tb_balance")
 public class Balance implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
+	@NotNull(message = "The 'Balance' field is required.")
 	public Double balance;
+	public Instant updatedAt;
+	@NotNull(message = "The 'Account ID' field is required.")
+	@OneToOne
 	public Account account;
+		
+	@OneToMany(mappedBy = "balance")
 	public List<Debit> debits = new ArrayList<>();
 	
 	public Balance() {
 		
 	}
 
-	public Balance(Long id, Double balance, Account account, List<Debit> debits) {
-		
+	public Balance(Long id, Double balance, Instant updatedAt, Account account, List<Debit> debits) {
 		this.id = id;
 		this.balance = balance;
+		this.updatedAt = updatedAt;
 		this.account = account;
 		this.debits = debits;
 	}
@@ -45,6 +60,14 @@ public class Balance implements Serializable {
 		this.balance = balance;
 	}
 
+	public Instant getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
 	public Account getAccount() {
 		return account;
 	}
@@ -56,9 +79,5 @@ public class Balance implements Serializable {
 	public List<Debit> getDebits() {
 		return debits;
 	}
-
-	public void setDebits(List<Debit> debits) {
-		this.debits = debits;
-	}
-
+	
 }
