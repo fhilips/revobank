@@ -35,24 +35,26 @@ public class AccountResource {
 	
 	@PostMapping(value = "/create")	
 	@ResponseStatus(HttpStatus.CREATED)
-	public MessageResponseDTO createAccount(@Valid @RequestBody AccountDTO accountDTO, UriComponentsBuilder uriBuilder) {			
-		return accountService.createAccount(accountDTO); 		
+	public MessageResponseDTO create(@Valid @RequestBody AccountDTO accountDTO, UriComponentsBuilder uriBuilder) {			
+		MessageResponseDTO messageAccountCreated = accountService.createAccount(accountDTO);
+		return messageAccountCreated;		
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<MessageResponseDTO> updateAccount(@Valid @PathVariable Long id, @RequestBody AccountUpdateDTO dto) {
-		MessageResponseDTO responseMessage = accountService.updateByDto(id, dto);		
-		return ResponseEntity.ok().body(responseMessage);
+	@ResponseStatus(HttpStatus.OK)
+	public MessageResponseDTO update(@Valid @PathVariable Long id, @RequestBody AccountUpdateDTO dto) {
+		MessageResponseDTO messageAccountUpdated = accountService.updateByDto(id, dto);		
+		return messageAccountUpdated;
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<AccountDTO> findAccountById(@PathVariable Long id) {
+	public ResponseEntity<AccountDTO> findById(@PathVariable Long id) {
 		AccountDTO dto = this.accountService.findById(id);		 
 		return ResponseEntity.ok().body(dto);		
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<AccountDTO>> getAllAccounts() {
+	public ResponseEntity<List<AccountDTO>> getAll() {
 		List<AccountDTO> allAccounts = accountService.getAllAccounts();
 		return ResponseEntity.ok().body(allAccounts);		
 	}

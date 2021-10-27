@@ -46,7 +46,7 @@ public class BalanceService{
 	}
 	
 	public List<BalanceDTO> getAllBalances() {
-		List<Balance> entities = balanceRepository.findAll();		
+		List<Balance> entities = balanceRepository.findAllBalancesWhereAccountStatusIsActive();		
 		return BalanceMapper.toListDto(entities);		
 	}
 

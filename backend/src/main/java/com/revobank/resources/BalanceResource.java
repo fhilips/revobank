@@ -48,7 +48,7 @@ public class BalanceResource {
 	@PostMapping(value = "/debit")	
 	public ResponseEntity<Debit> addDebit(@RequestBody @Valid DebitDTO dto) {		
 		debitService.addDebit(dto);
-		return ResponseEntity.ok().build();		
+		return ResponseEntity.created(null).build();		
 	}
 	
 	@GetMapping(value = "{accountId}/debits")	
