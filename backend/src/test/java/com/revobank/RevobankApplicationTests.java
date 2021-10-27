@@ -1,4 +1,4 @@
-package com.revobanck;
+package com.revobank;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

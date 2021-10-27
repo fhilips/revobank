@@ -43,7 +43,7 @@ public class DebitService{
 		balanceService.verifyIfAccountBlocked(accountStatus);
 		
 		if(dto.getAmount() > balanceEntity.getBalance()) {
-			accountShouldBeBlocked(balanceEntity.getAccount());			
+			verifyIfAccountShouldBeBlocked(balanceEntity.getAccount());			
 		} else {			
 			balanceService.updateTotalAmount(dto);
 			debitRepository.save(debitEntity);
@@ -67,7 +67,7 @@ public class DebitService{
 		return entity;
 	}
 	
-	private void accountShouldBeBlocked(Account account) {
+	private void verifyIfAccountShouldBeBlocked(Account account) {
 		JobTitle jobTitle = account.getJobTitle();
 		if(jobTitle.shouldBlockByInvalidAmount()) {
 			account.setStatus(Status.BLOCKED);

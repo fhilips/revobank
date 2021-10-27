@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.revobank.dto.AccountDTO;
+import com.revobank.dto.AccountUpdateDTO;
 import com.revobank.model.Account;
 import com.revobank.model.enums.JobTitle;
 import com.revobank.model.enums.Status;
@@ -17,7 +18,7 @@ public class AccountMapper {
 		return new AccountDTO(entity.getId(),
 				entity.getName(),
 				entity.getDocument(),
-				entity.getBirthDate().toString(),
+				localDateToString(entity.getBirthDate()),
 				entity.getJobTitle(),
 				entity.getStatus(),
 				entity.getCreatedAt(),										
@@ -28,7 +29,7 @@ public class AccountMapper {
 		return new AccountDTO(entity.getId(),
 				entity.getName(),
 				entity.getDocument(),
-				entity.getBirthDate().toString(),
+				localDateToString(entity.getBirthDate()),
 				entity.getJobTitle(),
 				entity.getStatus(),
 				entity.getCreatedAt(),										
@@ -61,7 +62,7 @@ public class AccountMapper {
 				);
 	}
 	
-	public static Account toUpdatedEntity(AccountDTO dto, Account entity) {
+	public static Account toUpdatedEntity(AccountUpdateDTO dto, Account entity) {
 		Account oldEntity = entity;	
 		
 		String name = (dto.getName() != null) ? dto.getName() : oldEntity.getName();
@@ -96,5 +97,11 @@ public class AccountMapper {
 	private static LocalDate stringToLocalDate(String date) {		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");		
 		return LocalDate.parse(date, formatter);
+	}
+	
+	private static String localDateToString(LocalDate localDate) {		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String formattedDate = localDate.format(formatter);
+		return formattedDate;
 	}
 }

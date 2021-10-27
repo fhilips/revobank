@@ -2,7 +2,11 @@ package com.revobank.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDate;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.revobank.model.enums.JobTitle;
 import com.revobank.model.enums.Status;
@@ -11,11 +15,17 @@ import com.revobank.model.enums.Status;
 public class AccountDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;	
-	private String name;	
+	private Long id;
+	@NotBlank(message = "The 'name' field is required.")
+	private String name;
+	@NotBlank(message = "The 'Document' field is required.")
+    @CPF
 	private String document;	
-	private String birthDate;	
+	@NotNull(message = "The 'Birth Date' field is required.")
+	private String birthDate;
+	@NotNull(message = "The 'Job Title' field is required.")
 	private JobTitle jobTitle;	
+	@NotNull(message = "The 'Status' field is required.")
 	private Status status;	
 	private Instant createdAt;	
 	private Instant updatedAt;
@@ -35,8 +45,7 @@ public class AccountDTO implements Serializable{
 		this.status = status;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-	}
-	
+	}	
 	
 	public AccountDTO(Long id, String name, String document, String birthDate, JobTitle jobTitle, Status status,
 			Instant createdAt, Instant updatedAt, String account, String accountDigit) {

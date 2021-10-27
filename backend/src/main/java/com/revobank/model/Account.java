@@ -13,9 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.br.CPF;
 
 import com.revobank.model.enums.JobTitle;
 import com.revobank.model.enums.Status;
@@ -29,22 +26,20 @@ public class Account implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull(message = "The 'name' field is required.")
+	
 	private String name;	
-	@NotNull(message = "The 'Document' field is required.")
-	@Column(unique = true)
-    @CPF
+	@Column(unique = true)    
 	private String document;
-	@NotNull(message = "The 'Birth Date' field is required.")
+	
 	private LocalDate birthDate;	
-	@Column(nullable = false)
+	@Column(nullable = false)	
 	private String account;	
 	@Column(nullable = false)	
 	private String accountDigit;
-	@NotNull(message = "The 'Job Title' field is required.")
+	
 	@Enumerated(EnumType.STRING)
 	private JobTitle jobTitle;
-	@NotNull(message = "The 'Status' field is required.")
+	
 	@Enumerated(EnumType.STRING)
 	private Status status;		
 	private Instant createdAt;
