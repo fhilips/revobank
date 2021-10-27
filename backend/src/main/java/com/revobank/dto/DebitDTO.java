@@ -15,6 +15,12 @@ public class DebitDTO {
 		this.amount = amount;
 		this.createdAt = Instant.now();
 		this.accountId = accountId;
+	}	
+
+	public DebitDTO(Double amount, Instant createdAt, Long accountId) {		
+		this.amount = amount;
+		this.createdAt = createdAt;
+		this.accountId = accountId;
 	}
 
 	public Double getAmount() {

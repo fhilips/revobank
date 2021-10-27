@@ -51,7 +51,7 @@ public class BalanceResource {
 		return ResponseEntity.ok().build();		
 	}
 	
-	@GetMapping(value = "/debits/{accountId}")	
+	@GetMapping(value = "{accountId}/debits")	
 	public ResponseEntity<List<DebitDTO>> getAllDebitsByAccountId(@PathVariable Long accountId) {
 		List<DebitDTO> allDebits = debitService.getAllDebitsByAccountId(accountId);
 		

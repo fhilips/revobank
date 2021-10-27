@@ -13,6 +13,7 @@ public class DebitMapper {
 	public static DebitDTO toDto(Debit entity) {
 		return new DebitDTO(
 				entity.getAmount(),
+				entity.getCreatedAt(),
 				entity.getId());		
 	}
 	
