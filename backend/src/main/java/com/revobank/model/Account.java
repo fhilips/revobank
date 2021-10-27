@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 import com.revobank.model.enums.JobTitle;
 import com.revobank.model.enums.Status;
-import com.revobank.resources.utils.DigitsGenerator;
+import com.revobank.utils.DigitsGenerator;
 
 @Entity
 @Table(name = "tb_account")

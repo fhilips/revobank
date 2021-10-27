@@ -1,4 +1,4 @@
-package com.revobank.resources.utils;
+package com.revobank.utils;
 
 import java.util.Random;
 

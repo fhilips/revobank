@@ -1,4 +1,4 @@
-package com.revobank.model.services;
+package com.revobank.services;
 
 import java.time.Instant;
 import java.util.List;
@@ -15,7 +15,7 @@ import com.revobank.model.Balance;
 import com.revobank.model.Debit;
 import com.revobank.model.enums.JobTitle;
 import com.revobank.model.enums.Status;
-import com.revobank.model.repositories.DebitRepository;
+import com.revobank.repositories.DebitRepository;
 
 
 @Service

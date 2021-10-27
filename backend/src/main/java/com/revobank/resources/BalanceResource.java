@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revobank.dto.BalanceDTO;
 import com.revobank.dto.DebitDTO;
 import com.revobank.model.Debit;
-import com.revobank.model.services.BalanceService;
-import com.revobank.model.services.DebitService;
+import com.revobank.services.BalanceService;
+import com.revobank.services.DebitService;
 
 @RestController
 @RequestMapping(value = "balances")

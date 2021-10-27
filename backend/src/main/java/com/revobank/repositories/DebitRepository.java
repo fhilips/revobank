@@ -1,4 +1,4 @@
-package com.revobank.model.repositories;
+package com.revobank.repositories;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.revobank.model.services;
+package com.revobank.services;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import com.revobank.mappers.BalanceMapper;
 import com.revobank.model.Account;
 import com.revobank.model.Balance;
 import com.revobank.model.enums.Status;
-import com.revobank.model.repositories.BalanceRepository;
+import com.revobank.repositories.BalanceRepository;
 
 @Service
 public class BalanceService{

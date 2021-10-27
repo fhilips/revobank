@@ -1,4 +1,4 @@
-package com.revobank.model.services;
+package com.revobank.services;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import com.revobank.dto.AccountUpdateDTO;
 import com.revobank.dto.response.MessageResponseDTO;
 import com.revobank.mappers.AccountMapper;
 import com.revobank.model.Account;
-import com.revobank.model.repositories.AccountRepository;
+import com.revobank.repositories.AccountRepository;
 
 @Service
 public class AccountService{

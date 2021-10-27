@@ -20,7 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.revobank.dto.AccountDTO;
 import com.revobank.dto.AccountUpdateDTO;
 import com.revobank.dto.response.MessageResponseDTO;
-import com.revobank.model.services.AccountService;
+import com.revobank.services.AccountService;
 
 @RestController
 @RequestMapping(value = "accounts")
