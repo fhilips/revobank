@@ -34,18 +34,6 @@ public class AccountDTO implements Serializable {
 	public AccountDTO() {
 	}
 
-//	public AccountDTO(Long id, String name, String document, String birthDate, JobTitle jobTitle, Status status,
-//			Instant createdAt, Instant updatedAt) {
-//		this.id = id;
-//		this.name = name;
-//		this.document = document;
-//		this.birthDate = birthDate;
-//		this.jobTitle = jobTitle;
-//		this.status = status;
-//		this.createdAt = createdAt;
-//		this.updatedAt = updatedAt;
-//	}	
-
 	public String getName() {
 		return name;
 	}

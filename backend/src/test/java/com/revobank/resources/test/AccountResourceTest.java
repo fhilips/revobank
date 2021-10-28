@@ -109,7 +109,6 @@ public class AccountResourceTest {
 		
 		result.andExpect(jsonPath("$[0].name").value("Carlos Albuquerque"));
 		result.andExpect(jsonPath("$[1].name").value("Maria Candida"));
-		result.andExpect(jsonPath("$[2].name").value("João Augusto"));
 		
 	}
 	

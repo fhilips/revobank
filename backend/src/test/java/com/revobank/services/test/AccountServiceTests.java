@@ -1,7 +1,5 @@
 package com.revobank.services.test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -18,7 +16,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.revobank.dto.AccountDTO;
 import com.revobank.dto.response.MessageResponseDTO;
-import com.revobank.exceptions.ResourceNotFoundException;
 import com.revobank.factory.AccountFactory;
 import com.revobank.model.Account;
 import com.revobank.repositories.AccountRepository;

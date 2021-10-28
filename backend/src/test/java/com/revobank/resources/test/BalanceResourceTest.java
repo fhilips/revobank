@@ -2,7 +2,6 @@ package com.revobank.resources.test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -17,9 +16,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revobank.dto.AccountDTO;
 import com.revobank.dto.DebitDTO;
-import com.revobank.factory.AccountFactory;
 import com.revobank.factory.BalanceFactory;
 
 @SpringBootTest
@@ -125,7 +122,7 @@ public class BalanceResourceTest {
 					.contentType(MediaType.APPLICATION_JSON));
 
 		result.andExpect(status().isNotFound());
-		result.andExpect(jsonPath("$.error").value("Entity not found"));			
+		result.andExpect(jsonPath("$.error").value("Resource not found"));			
 		
 	}
 }
