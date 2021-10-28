@@ -5,17 +5,19 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revobank.dto.BalanceDTO;
 import com.revobank.dto.DebitDTO;
-import com.revobank.model.Debit;
+import com.revobank.dto.response.MessageResponseDTO;
 import com.revobank.services.BalanceService;
 import com.revobank.services.DebitService;
 
@@ -34,7 +36,7 @@ public class BalanceResource {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<BalanceDTO>> getAllBalances() {
+	public ResponseEntity<List<BalanceDTO>> getAll() {
 		List<BalanceDTO> allBalances = balanceService.getAllBalances();
 		return ResponseEntity.ok().body(allBalances);		
 	}
@@ -46,9 +48,10 @@ public class BalanceResource {
 	}
 	
 	@PostMapping(value = "/debit")	
-	public ResponseEntity<Debit> addDebit(@RequestBody @Valid DebitDTO dto) {		
-		debitService.addDebit(dto);
-		return ResponseEntity.created(null).build();		
+	@ResponseStatus(HttpStatus.OK)
+	public MessageResponseDTO addDebit(@RequestBody @Valid DebitDTO dto) {		
+		MessageResponseDTO messageAddDebit = debitService.addDebit(dto);
+		return messageAddDebit;		
 	}
 	
 	@GetMapping(value = "{accountId}/debits")	

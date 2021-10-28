@@ -11,32 +11,51 @@ import org.hibernate.validator.constraints.br.CPF;
 import com.revobank.model.enums.JobTitle;
 import com.revobank.model.enums.Status;
 
-
-public class AccountDTO implements Serializable{
+public class AccountDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	@NotBlank(message = "The 'name' field is required.")
 	private String name;
 	@NotBlank(message = "The 'Document' field is required.")
-    @CPF
-	private String document;	
+	@CPF
+	private String document;
 	@NotNull(message = "The 'Birth Date' field is required.")
 	private String birthDate;
 	@NotNull(message = "The 'Job Title' field is required.")
-	private JobTitle jobTitle;	
+	private JobTitle jobTitle;
 	@NotNull(message = "The 'Status' field is required.")
-	private Status status;	
-	private Instant createdAt;	
+	private Status status;
+	private Instant createdAt;
 	private Instant updatedAt;
 	private String account;
 	private String accountDigit;
-	
-	public AccountDTO() {		
+
+	public AccountDTO() {
 	}
 
-	public AccountDTO(Long id, String name, String document, String birthDate, JobTitle jobTitle, Status status,
-			Instant createdAt, Instant updatedAt) {
+//	public AccountDTO(Long id, String name, String document, String birthDate, JobTitle jobTitle, Status status,
+//			Instant createdAt, Instant updatedAt) {
+//		this.id = id;
+//		this.name = name;
+//		this.document = document;
+//		this.birthDate = birthDate;
+//		this.jobTitle = jobTitle;
+//		this.status = status;
+//		this.createdAt = createdAt;
+//		this.updatedAt = updatedAt;
+//	}	
+
+	public String getName() {
+		return name;
+	}
+
+	public AccountDTO(Long id, @NotBlank(message = "The 'name' field is required.") String name,
+			@NotBlank(message = "The 'Document' field is required.") @CPF String document,
+			@NotNull(message = "The 'Birth Date' field is required.") String birthDate,
+			@NotNull(message = "The 'Job Title' field is required.") JobTitle jobTitle,
+			@NotNull(message = "The 'Status' field is required.") Status status, Instant createdAt, Instant updatedAt) {
+
 		this.id = id;
 		this.name = name;
 		this.document = document;
@@ -45,11 +64,14 @@ public class AccountDTO implements Serializable{
 		this.status = status;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-	}	
-	
-	public AccountDTO(Long id, String name, String document, String birthDate, JobTitle jobTitle, Status status,
-			Instant createdAt, Instant updatedAt, String account, String accountDigit) {
-		super();
+	}
+
+	public AccountDTO(Long id, @NotBlank(message = "The 'name' field is required.") String name,
+			@NotBlank(message = "The 'Document' field is required.") @CPF String document,
+			@NotNull(message = "The 'Birth Date' field is required.") String birthDate,
+			@NotNull(message = "The 'Job Title' field is required.") JobTitle jobTitle,
+			@NotNull(message = "The 'Status' field is required.") Status status, Instant createdAt, Instant updatedAt,
+			String account, String accountDigit) {
 		this.id = id;
 		this.name = name;
 		this.document = document;
@@ -60,10 +82,6 @@ public class AccountDTO implements Serializable{
 		this.updatedAt = updatedAt;
 		this.account = account;
 		this.accountDigit = accountDigit;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public void setName(String name) {
@@ -144,6 +162,6 @@ public class AccountDTO implements Serializable{
 
 	public void setAccount(String account) {
 		this.account = account;
-	}	
+	}
 
 }

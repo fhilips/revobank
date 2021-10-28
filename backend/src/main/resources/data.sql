@@ -9,6 +9,6 @@ INSERT INTO tb_account (name, document, birth_date, created_at, updated_at, job_
 
 INSERT INTO tb_balance (balance, account_id, updated_at) VALUES (5000, 1, TIMESTAMP WITH TIME ZONE '2021-07-14T10:00:00Z');
 
-INSERT INTO tb_balance (balance, account_id, updated_at) VALUES (5000, 2, TIMESTAMP WITH TIME ZONE '2021-10-18T10:00:00Z');
+INSERT INTO tb_balance (balance, account_id, updated_at) VALUES (8000, 2, TIMESTAMP WITH TIME ZONE '2021-10-18T10:00:00Z');
 
-INSERT INTO tb_balance (balance, account_id, updated_at) VALUES (5000, 3, TIMESTAMP WITH TIME ZONE '2021-10-20T10:00:00Z');
+INSERT INTO tb_balance (balance, account_id, updated_at) VALUES (20000, 3, TIMESTAMP WITH TIME ZONE '2021-10-20T10:00:00Z');

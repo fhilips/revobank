@@ -80,6 +80,6 @@ public class BalanceService{
 		if(status.equals(Status.BLOCKED)) {			
 			throw new ForbiddenArgumentException("Account is blocked!");
 		}
-	}
+	}	
 	
 }

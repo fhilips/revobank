@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.revobank.dto.AccountDTO;
 import com.revobank.dto.DebitDTO;
+import com.revobank.dto.response.MessageResponseDTO;
 import com.revobank.exceptions.ForbiddenArgumentException;
 import com.revobank.mappers.DebitMapper;
 import com.revobank.model.Account;
@@ -34,7 +35,7 @@ public class DebitService{
 		this.accountService = accountService;
 	}
 
-	public void addDebit(DebitDTO dto) {
+	public MessageResponseDTO addDebit(DebitDTO dto) {
 		Debit debitEntity = toEntity(dto);
 		Balance balanceEntity = balanceService.findEntityByAccountID(dto.getAccountId());
 				
@@ -43,11 +44,13 @@ public class DebitService{
 		balanceService.verifyIfAccountBlocked(accountStatus);
 		
 		if(dto.getAmount() > balanceEntity.getBalance()) {
-			verifyIfAccountShouldBeBlocked(balanceEntity.getAccount());			
+			verifyIfAccountShouldBeBlocked(balanceEntity.getAccount());		
+			return createMessageResponse("Error to create debit on balance ID ", debitEntity.getBalance().getId());
 		} else {			
 			balanceService.updateTotalAmount(dto);
 			debitRepository.save(debitEntity);
-		}					
+			return createMessageResponse("Debit created on balance ID ", debitEntity.getBalance().getId());
+		}							
 	}	
 
 	public List<DebitDTO> getAllDebitsByAccountId(Long id) {
@@ -76,4 +79,8 @@ public class DebitService{
 		} 			
 		throw new ForbiddenArgumentException("Not enough balance!");		
 	}
+	
+	private MessageResponseDTO createMessageResponse(String message, Long amount) {
+        return new MessageResponseDTO(message + amount);                
+    }	
 }
