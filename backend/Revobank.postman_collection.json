@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "e444695b-6f20-4a10-9efa-905884ff21e3",
+		"name": "Revobank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "create account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"FILIPE\",\r\n    \"document\":\"416.520.348-38\",\r\n    \"birthDate\":\"1993-05-01\",\t\r\n\t\"jobTitle\":\"COUNTER\",\r\n\t\"status\":\"ACTIVE\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/accounts/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"accounts",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all accounts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/accounts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find account by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/accounts/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"accounts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update account",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"FILIPE\",\r\n    \r\n    \"birthDate\":\"1993-05-01\",\t\r\n\t\"jobTitle\":\"COUNTER\",\r\n\t\"status\":\"ACTIVE\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/accounts/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"accounts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Balance",
+			"item": [
+				{
+					"name": "find balance by account id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/balances/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"balances",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all balances",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "add debit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"amount\":\"2000\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/balances/debit",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"balances",
+								"debit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all debits by account id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/balances/1/debits",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"balances",
+								"1",
+								"debits"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
