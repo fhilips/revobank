@@ -6,6 +6,7 @@ import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revobank.dto.AccountDTO;
 import com.revobank.dto.AccountUpdateDTO;
@@ -27,6 +28,7 @@ public class AccountService{
 		this.balanceService = balanceService;
 	}
 	
+	@Transactional
 	public MessageResponseDTO createAccount(AccountDTO accountDTO) {			
 		Account entity = AccountMapper.toEntityOnCreate(accountDTO);		
 		Account savedAccount = accountRepository.save(entity);
@@ -34,16 +36,7 @@ public class AccountService{
 		return createMessageResponse("Created account with ID ", savedAccount.getId());
 	}
 	
-	public List<AccountDTO> getAllAccounts() {
-		List<Account> entities = accountRepository.findAll();		
-		return AccountMapper.toListDtoOnResponse(entities);		
-	}	
-	
-	public void updateByEntity(Account entity) {
-		verifyIfExists(entity.getId());		
-		accountRepository.save(entity);		
-	}
-	
+	@Transactional
 	public MessageResponseDTO updateByDto(Long id, AccountUpdateDTO dto) {
 		Account entity = verifyIfExists(id);		
 		Account updatedEntity = AccountMapper.toUpdatedEntity(dto, entity);				
@@ -51,11 +44,25 @@ public class AccountService{
 		return createMessageResponse("Updated account with ID ", savedEntity.getId());	
 	}
 	
+	@Transactional
+	public void updateByEntity(Account entity) {
+		verifyIfExists(entity.getId());		
+		accountRepository.save(entity);		
+	}
+	
+	@Transactional(readOnly = true)
+	public List<AccountDTO> getAllAccounts() {
+		List<Account> entities = accountRepository.findAll();		
+		return AccountMapper.toListDtoOnResponse(entities);		
+	}	
+				
+	@Transactional(readOnly = true)
 	public AccountDTO findById(Long id) {
 		Account entity = verifyIfExists(id);
 		return AccountMapper.toDtoOnResponse(entity);
 	}
 	
+	@Transactional(readOnly = true)
 	private Account verifyIfExists(Long id) throws RuntimeException {		
 		return accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Account not found."));
 	}

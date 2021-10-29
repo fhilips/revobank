@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.revobank.dto.AccountDTO;
 import com.revobank.dto.AccountUpdateDTO;
@@ -35,7 +34,7 @@ public class AccountResource {
 	
 	@PostMapping(value = "/create")	
 	@ResponseStatus(HttpStatus.CREATED)
-	public MessageResponseDTO create(@Valid @RequestBody AccountDTO accountDTO, UriComponentsBuilder uriBuilder) {			
+	public MessageResponseDTO create(@Valid @RequestBody AccountDTO accountDTO) {			
 		MessageResponseDTO messageAccountCreated = accountService.createAccount(accountDTO);
 		return messageAccountCreated;		
 	}

@@ -1,13 +1,16 @@
 # Revobank Coding Exercise
 
+#### Postman Collection
 
-### localhost:8080/swagger-ui.html - Swagger Api documentation
+Link: https://www.getpostman.com/collections/9155a07a17abf6f612a9
 
+#### Swagger Api documentation
+
+localhost:8080/swagger-ui.html
 
 ## Usage
 
-
-### Account
+#### Account
 
 POST localhost:8080/accounts/create - Create new account.
 
@@ -17,7 +20,7 @@ POST localhost:8080/accounts/{id} - Find account by id.
 
 PUT localhost:8080/accounts/{id} - Update existing Account entry.
 
-### Balance 
+#### Balance
 
 POST localhost:8080/balances/debit - Add debit by account id.
 
@@ -27,4 +30,11 @@ GET localhost:8080/balances - Get all balances.
 
 GET localhost:8080/balances/1/debits - Find All debits by account id.
 
+## Tools
 
+- Java 11
+- Spring Boot
+- H2 Database
+- Spring Data JPA
+- Bean Validation
+- Swagger - Api documentation

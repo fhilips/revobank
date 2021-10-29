@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revobank.dto.AccountDTO;
 import com.revobank.dto.DebitDTO;
@@ -35,6 +36,7 @@ public class DebitService{
 		this.accountService = accountService;
 	}
 
+	@Transactional
 	public MessageResponseDTO addDebit(DebitDTO dto) {
 		Debit debitEntity = toEntity(dto);
 		Balance balanceEntity = balanceService.findEntityByAccountID(dto.getAccountId());
@@ -53,6 +55,7 @@ public class DebitService{
 		}							
 	}	
 
+	@Transactional(readOnly = true)
 	public List<DebitDTO> getAllDebitsByAccountId(Long id) {
 		AccountDTO account = accountService.findById(id);
 		balanceService.verifyIfAccountBlocked(account.getStatus());
@@ -60,7 +63,8 @@ public class DebitService{
 		List<Debit> allDebits = debitRepository.findAllByBalanceId(id);
 		return DebitMapper.toListDto(allDebits);
 	}
-		
+	
+	@Transactional(readOnly = true)	
 	private Debit toEntity(DebitDTO dto) {
 		Debit entity = new Debit();		
 		Balance balance = balanceService.findById(dto.getAccountId());		
@@ -80,7 +84,7 @@ public class DebitService{
 		throw new ForbiddenArgumentException("Not enough balance!");		
 	}
 	
-	private MessageResponseDTO createMessageResponse(String message, Long amount) {
-        return new MessageResponseDTO(message + amount);                
+	private MessageResponseDTO createMessageResponse(String message, Long id) {
+        return new MessageResponseDTO(message + id);                
     }	
 }
