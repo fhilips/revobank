@@ -10,8 +10,7 @@ import com.revobank.model.Balance;
 public class BalanceMapper {
 	
 	public static BalanceDTO toDto(Balance entity) {
-		return new BalanceDTO(entity.getId(),
-							entity.getBalance(),
+		return new BalanceDTO(entity.getBalance(),
 							Instant.now(),
 							entity.getId());
 	}

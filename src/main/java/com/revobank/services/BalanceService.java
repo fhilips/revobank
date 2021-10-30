@@ -1,8 +1,7 @@
 package com.revobank.services;
 
+import java.time.Instant;
 import java.util.List;
-
-import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,9 +29,11 @@ public class BalanceService{
 
 	@Transactional
 	public void createBalance(Account account) {
-		Balance entity = new Balance();		
+		Balance entity = new Balance();	
+		
 		entity.setAccount(account);
 		entity.setBalance(account.getJobTitle().getInicialBalance());
+		entity.setUpdatedAt(Instant.now());
 		balanceRepository.save(entity);
 	}
 	
@@ -41,10 +42,11 @@ public class BalanceService{
 		Balance entity = verifyIfExists(dto.getAccountId());			
 			
 		if(dto.getAmount() > entity.getBalance()) {
-			throw new RuntimeErrorException(null);
+			throw new ForbiddenArgumentException("Not enough balance!");
 		}
 		Double amount = (entity.getBalance() - dto.getAmount());
 		entity.setBalance(amount);
+		entity.setUpdatedAt(Instant.now());
 		balanceRepository.save(entity);	
 	}
 	

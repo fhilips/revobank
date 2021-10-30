@@ -4,7 +4,6 @@ import java.time.Instant;
 
 public class BalanceDTO {
 
-	public Long id;		
 	public Double balance;
 	public Instant updatedAt;	
 	public Long accountId;
@@ -13,20 +12,13 @@ public class BalanceDTO {
 	
 	}
 
-	public BalanceDTO(Long id, Double balance, Instant updatedAt, Long accountId) {
-		this.id = id;
+	public BalanceDTO( Double balance, Instant updatedAt, Long accountId) {
+
 		this.balance = balance;
 		this.updatedAt = updatedAt;
 		this.accountId = accountId;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Double getBalance() {
 		return balance;
