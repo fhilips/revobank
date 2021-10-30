@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,7 +47,8 @@ public class Account implements Serializable {
 	private Instant createdAt;
 	private Instant updatedAt;
 	
-	@OneToOne(mappedBy = "account")
+	@OneToOne(mappedBy = "account", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
 	private Balance balance;
 
 	public Account() {

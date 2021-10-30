@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,14 +21,14 @@ import javax.validation.constraints.NotNull;
 public class Balance implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id	
 	public Long id;
 	@NotNull(message = "The 'Balance' field is required.")
 	public Double balance;
 	public Instant updatedAt;
 	@NotNull(message = "The 'Account ID' field is required.")
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
+    @MapsId
 	public Account account;
 		
 	@OneToMany(mappedBy = "balance")
