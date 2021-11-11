@@ -13,20 +13,18 @@ import com.revobank.dto.AccountUpdateDTO;
 import com.revobank.dto.response.MessageResponseDTO;
 import com.revobank.mappers.AccountMapper;
 import com.revobank.model.Account;
+import com.revobank.model.enums.Status;
 import com.revobank.repositories.AccountRepository;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AccountService{
 	
 	private AccountRepository accountRepository;
 	
 	private BalanceService balanceService;
-	
-	@Autowired
-	public AccountService(AccountRepository accountRepository, BalanceService balanceService) {		
-		this.accountRepository = accountRepository;
-		this.balanceService = balanceService;
-	}
 	
 	@Transactional
 	public MessageResponseDTO createAccount(AccountDTO accountDTO) {			
@@ -43,13 +41,7 @@ public class AccountService{
 		Account savedEntity = accountRepository.save(updatedEntity);		
 		return createMessageResponse("Updated account with ID ", savedEntity.getId());	
 	}
-	
-	@Transactional
-	public void updateByEntity(Account entity) {
-		verifyIfExists(entity.getId());		
-		accountRepository.save(entity);		
-	}
-	
+		
 	@Transactional(readOnly = true)
 	public List<AccountDTO> getAllAccounts() {
 		List<Account> entities = accountRepository.findAll();		
@@ -60,6 +52,13 @@ public class AccountService{
 	public AccountDTO findById(Long id) {
 		Account entity = verifyIfExists(id);
 		return AccountMapper.toDtoOnResponse(entity);
+	}	
+
+	@Transactional
+	public void blockAccount(Long accountId) {
+		Account account = verifyIfExists(accountId);		
+		account.setStatus(Status.BLOCKED);
+		accountRepository.save(account);		
 	}
 	
 	@Transactional(readOnly = true)

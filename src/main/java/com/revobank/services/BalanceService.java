@@ -17,16 +17,14 @@ import com.revobank.model.Balance;
 import com.revobank.model.enums.Status;
 import com.revobank.repositories.BalanceRepository;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class BalanceService{
 
 	BalanceRepository balanceRepository;
 	
-	@Autowired
-	public BalanceService(BalanceRepository repository) {
-		this.balanceRepository = repository;
-	}
-
 	@Transactional
 	public void createBalance(Account account) {
 		Balance entity = new Balance();	

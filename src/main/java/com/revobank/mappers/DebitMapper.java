@@ -17,6 +17,13 @@ public class DebitMapper {
 				entity.getId());		
 	}
 	
+	public static Debit toEntity(DebitDTO dto, Balance balanceEntity) {
+		return new Debit(dto.getAccountId(),
+				dto.getAmount(),
+				Instant.now(),
+				balanceEntity);	
+	}
+	
 	public static Debit toEntity(DebitDTO dto) {
 		return new Debit(dto.getAccountId(),
 				dto.getAmount(),
@@ -27,4 +34,6 @@ public class DebitMapper {
 	public static List<DebitDTO> toListDto(List<Debit> list) {
 		return list.stream().map(x -> DebitMapper.toDto(x)).collect(Collectors.toList());	
 	}
+
+	
 }
