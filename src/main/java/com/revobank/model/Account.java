@@ -30,12 +30,15 @@ public class Account implements Serializable {
 	private Long id;
 	
 	private String name;	
+	
 	@Column(unique = true)    
 	private String document;
 	
-	private LocalDate birthDate;	
-	@Column(nullable = false)	
+	private LocalDate birthDate;
+	
+	@Column(nullable = false)		
 	private String account;	
+	
 	@Column(nullable = false)	
 	private String accountDigit;
 	
@@ -46,6 +49,7 @@ public class Account implements Serializable {
 	private Status status;		
 	private Instant createdAt;
 	private Instant updatedAt;
+	
 	
 	@OneToOne(mappedBy = "account", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)

@@ -15,10 +15,12 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.revobank.dto.AccountDTO;
+import com.revobank.dto.AccountUpdateDTO;
 import com.revobank.dto.response.MessageResponseDTO;
 import com.revobank.factory.AccountFactory;
 import com.revobank.model.Account;
 import com.revobank.repositories.AccountRepository;
+import com.revobank.repositories.BalanceRepository;
 import com.revobank.services.AccountService;
 import com.revobank.services.BalanceService;
 
@@ -28,28 +30,37 @@ public class AccountServiceTests {
 	@InjectMocks
 	private AccountService service;
 	
-	@Mock
+	@InjectMocks
 	private BalanceService balanceService;
 	
 	@Mock
 	private AccountRepository repository;
 	
+	@Mock
+	private BalanceRepository balanceRepository;
+	
 	private Account account;	
 	private AccountDTO accountDto;
+	private AccountUpdateDTO accountUpdateDto;
 	private Long nonExistingId;
 	private Long existingId;
+
 
 	@BeforeEach
 	void setUp() throws Exception{
 		existingId = 1l;
 		nonExistingId = 300l;	
 		
+		service = new AccountService(repository, balanceService);
+		
 		account = AccountFactory.createAccount();
 		accountDto = AccountFactory.createAccountDTO();
-		
+		accountUpdateDto = AccountFactory.createAccountUpdateDTO();
+				
 		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(account));
 		Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty());		
 		Mockito.when(repository.save(ArgumentMatchers.any())).thenReturn(account);
+
 	}
 	
 	@Test
@@ -72,15 +83,38 @@ public class AccountServiceTests {
 	public void createdAccountShouldReturnCorrectMessageWhenValidData() {		
 		MessageResponseDTO dto = service.createAccount(accountDto);
 		
+		Assertions.assertNotNull(dto);		
 		Assertions.assertEquals(dto.getMessage(), "Created account with ID " + existingId);	
+	}
+		
+		
+	@Test
+	public void updateAccountShouldReturnMessageResponseWhenValidData() {
+		
+		MessageResponseDTO dto = service.updateByDto(existingId, accountUpdateDto);
+		
+		Assertions.assertNotNull(dto);	
+		Assertions.assertEquals(dto.getMessage(), "Updated account with ID " + existingId);				
 	}
 	
 	@Test
-	public void createdAccountShouldReturnMessaResponseWhenValidData() {
-		
-		MessageResponseDTO dto = service.createAccount(accountDto);
-		
-		Assertions.assertNotNull(dto);		
+	public void updateAccountWhenNonExistingIdShouldThrowEntityNotFoundException() {
+			
+		Assertions.assertThrows(EntityNotFoundException.class, () -> {
+			service.updateByDto(nonExistingId, accountUpdateDto);
+		});	
+				
 	}
+	
+	@Test
+	public void getAllAccountShould() {
+			
+		Assertions.assertThrows(EntityNotFoundException.class, () -> {
+			service.updateByDto(nonExistingId, accountUpdateDto);
+		});	
+				
+	}
+	
+	
 		
 }

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.revobank.dto.AccountDTO;
+import com.revobank.dto.AccountUpdateDTO;
 import com.revobank.model.Account;
 import com.revobank.model.enums.JobTitle;
 import com.revobank.model.enums.Status;
@@ -19,9 +20,22 @@ public class AccountFactory {
 	
 	public static AccountDTO createAccountDTO() {
 		Account account = createAccount();
-		return new AccountDTO(account.getId(), account.getName(), account.getDocument(),
-				localDateToString(account.getBirthDate()), account.getJobTitle(), account.getStatus(),
-				account.getCreatedAt(), account.getUpdatedAt());
+		return new AccountDTO(account.getId(),
+							account.getName(),
+							account.getDocument(),
+							localDateToString(account.getBirthDate()),
+							account.getJobTitle(),
+							account.getStatus(),
+							account.getCreatedAt(),
+							account.getUpdatedAt());
+	}
+	
+	public static AccountUpdateDTO createAccountUpdateDTO() {
+		Account account = createAccount();
+		return new AccountUpdateDTO(account.getName(),
+							localDateToString(account.getBirthDate()),
+							account.getJobTitle(),
+							account.getStatus());
 	}
 	
 	private static LocalDate stringToLocalDate(String date) {		

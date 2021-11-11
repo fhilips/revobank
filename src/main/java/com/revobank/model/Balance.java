@@ -43,6 +43,11 @@ public class Balance implements Serializable {
 		this.account = account;
 		this.debits = debits;
 	}
+	public Balance(Double balance, Instant updatedAt, Account account) {
+		this.balance = balance;
+		this.updatedAt = updatedAt;
+		this.account = account;		
+	}
 
 	public Long getId() {
 		return id;
