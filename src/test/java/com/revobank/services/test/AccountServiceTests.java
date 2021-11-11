@@ -1,5 +1,6 @@
 package com.revobank.services.test;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -59,7 +60,7 @@ public class AccountServiceTests {
 				
 		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(account));
 		Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty());		
-		Mockito.when(repository.save(ArgumentMatchers.any())).thenReturn(account);
+		Mockito.when(repository.save(ArgumentMatchers.any())).thenReturn(account);		
 
 	}
 	
@@ -107,14 +108,13 @@ public class AccountServiceTests {
 	}
 	
 	@Test
-	public void getAllAccountShould() {
+	public void getAllAccountsShouldNotReturnNull() {
 			
-		Assertions.assertThrows(EntityNotFoundException.class, () -> {
-			service.updateByDto(nonExistingId, accountUpdateDto);
-		});	
-				
-	}
-	
-	
+		service.createAccount(accountDto);
+		service.createAccount(accountDto);
+		List<AccountDTO> allAccounts = service.getAllAccounts();
+		
+		Assertions.assertNotNull(allAccounts);		
+	}	
 		
 }

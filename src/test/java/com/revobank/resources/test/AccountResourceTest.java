@@ -46,6 +46,7 @@ public class AccountResourceTest {
 	public void createShouldReturnIsCreatedWhenValidData() throws Exception {
 		
 		AccountDTO dto = AccountFactory.createAccountDTO();
+		dto.setId(null);
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		ResultActions result =
@@ -55,7 +56,7 @@ public class AccountResourceTest {
 					.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isCreated());
-		result.andExpect(jsonPath("$.message").value("Created account with ID 1"));
+		result.andExpect(jsonPath("$.message").value("Created account with ID 4"));
 		
 	}
 	
@@ -80,7 +81,7 @@ public class AccountResourceTest {
 	public void createShouldReturnIsUnprocessableEntityWhenRequiredFieIsNull() throws Exception {
 		
 		AccountDTO dto = AccountFactory.createAccountDTO();
-		dto.setBirthDate(null);;
+		dto.setBirthDate(null);
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		ResultActions result =
