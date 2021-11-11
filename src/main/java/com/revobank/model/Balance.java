@@ -14,6 +14,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_balance")
 public class Balance implements Serializable {
@@ -31,58 +39,11 @@ public class Balance implements Serializable {
 		
 	@OneToMany(mappedBy = "balance")
 	public List<Debit> debits = new ArrayList<>();
-	
-	public Balance() {
-		
-	}
 
-	public Balance(Long id, Double balance, Instant updatedAt, Account account, List<Debit> debits) {
-		this.id = id;
-		this.balance = balance;
-		this.updatedAt = updatedAt;
-		this.account = account;
-		this.debits = debits;
-	}
 	public Balance(Double balance, Instant updatedAt, Account account) {
 		this.balance = balance;
 		this.updatedAt = updatedAt;
 		this.account = account;		
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(Double balance) {
-		this.balance = balance;
-	}
-
-	public Instant getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Instant updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public List<Debit> getDebits() {
-		return debits;
-	}
-	
 }

@@ -21,20 +21,17 @@ import com.revobank.dto.response.MessageResponseDTO;
 import com.revobank.services.BalanceService;
 import com.revobank.services.DebitService;
 
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping(value = "balances")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class BalanceResource {
 	
 	private BalanceService balanceService;
 	
 	private DebitService debitService;
-		
-	@Autowired
-	public BalanceResource(BalanceService balanceService, DebitService debitService) {		
-		this.balanceService = balanceService;
-		this.debitService = debitService;	
-	}
-
+	
 	@GetMapping
 	public ResponseEntity<List<BalanceDTO>> getAll() {
 		List<BalanceDTO> allBalances = balanceService.getAllBalances();

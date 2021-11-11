@@ -21,17 +21,15 @@ import com.revobank.dto.AccountUpdateDTO;
 import com.revobank.dto.response.MessageResponseDTO;
 import com.revobank.services.AccountService;
 
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping(value = "accounts")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AccountResource {
 	
 	private AccountService accountService;
-	
-	@Autowired
-	public AccountResource(AccountService accountService) {
-		this.accountService = accountService;
-	}
-	
+		
 	@PostMapping(value = "/create")	
 	@ResponseStatus(HttpStatus.CREATED)
 	public MessageResponseDTO create(@Valid @RequestBody AccountDTO accountDTO) {			

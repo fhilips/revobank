@@ -18,7 +18,6 @@ public interface BalanceRepository extends JpaRepository<Balance, Long> {
 			+ "INNER JOIN tb_account a ON b.account_id = a.id "
 			+ "WHERE a.status = 'ACTIVE'")
 	List<Balance> findAllBalancesWhereAccountStatusIsActive();
-	
-	
+		
 }
 

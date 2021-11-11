@@ -20,6 +20,14 @@ import com.revobank.model.enums.JobTitle;
 import com.revobank.model.enums.Status;
 import com.revobank.utils.DigitsGenerator;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_account")
 public class Account implements Serializable {
@@ -54,9 +62,6 @@ public class Account implements Serializable {
 	@OneToOne(mappedBy = "account", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
 	private Balance balance;
-
-	public Account() {
-	}
 		
 	public Account(Long id, String name, String document, LocalDate birthDate, JobTitle jobTitle,
 			Status status, Instant createdAt, Instant updatedAt) {
@@ -70,94 +75,6 @@ public class Account implements Serializable {
 		this.updatedAt = updatedAt;		
 		this.account = DigitsGenerator.generateDigits(7);
 		this.accountDigit = DigitsGenerator.generateDigits(1);
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDocument() {
-		return document;
-	}
-
-	public void setDocument(String document) {
-		this.document = document;
-	}
-
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getAccountDigit() {
-		return accountDigit;
-	}
-
-	public void setAccountDigit(String accountDigit) {
-		this.accountDigit = accountDigit;
-	}
-
-	public JobTitle getJobTitle() {
-		return jobTitle;
-	}
-
-	public void setJobTitle(JobTitle jobTitle) {
-		this.jobTitle = jobTitle;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public Instant getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Instant createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Instant getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Instant updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public Balance getBalance() {
-		return balance;
-	}
-
-	public void setBalance(Balance balance) {
-		this.balance = balance;
-	}
+	}	
 	
 }

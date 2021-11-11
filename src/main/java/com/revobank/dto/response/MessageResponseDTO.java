@@ -1,19 +1,14 @@
 package com.revobank.dto.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MessageResponseDTO {
 
     private String message;    
-
-	public MessageResponseDTO(String message) {
-		this.setMessage(message);
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}    
-    
+   
 }
