@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.revobank.model.enums.JobTitle;
 import com.revobank.model.enums.Status;
 import com.revobank.utils.DigitsGenerator;
@@ -57,8 +58,7 @@ public class Account implements Serializable {
 	private Status status;		
 	private Instant createdAt;
 	private Instant updatedAt;
-	
-	
+
 	@OneToOne(mappedBy = "account", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
 	private Balance balance;

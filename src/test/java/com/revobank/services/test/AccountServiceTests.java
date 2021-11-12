@@ -52,7 +52,7 @@ public class AccountServiceTests {
 		existingId = 1l;
 		nonExistingId = 300l;	
 		
-		service = new AccountService(repository, balanceService);
+		service = new AccountService(repository, balanceService, null);
 		
 		account = AccountFactory.createAccount();
 		accountDto = AccountFactory.createAccountDTO();

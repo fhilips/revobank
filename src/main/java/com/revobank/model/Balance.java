@@ -14,6 +14,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +35,7 @@ public class Balance implements Serializable {
 	@NotNull(message = "The 'Balance' field is required.")
 	public Double balance;
 	public Instant updatedAt;
+
 	@NotNull(message = "The 'Account ID' field is required.")
 	@OneToOne(fetch = FetchType.LAZY)
     @MapsId

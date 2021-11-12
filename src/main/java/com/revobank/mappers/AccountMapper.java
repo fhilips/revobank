@@ -18,8 +18,6 @@ import org.springframework.beans.BeanWrapperImpl;
 import com.revobank.dto.AccountDTO;
 import com.revobank.dto.AccountUpdateDTO;
 import com.revobank.model.Account;
-import com.revobank.model.enums.JobTitle;
-import com.revobank.model.enums.Status;
 
 public class AccountMapper {
 	

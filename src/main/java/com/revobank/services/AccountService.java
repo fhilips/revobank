@@ -5,16 +5,20 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revobank.dto.AccountDTO;
 import com.revobank.dto.AccountUpdateDTO;
+import com.revobank.dto.filters.AccountFilter;
 import com.revobank.dto.response.MessageResponseDTO;
 import com.revobank.mappers.AccountMapper;
 import com.revobank.model.Account;
 import com.revobank.model.enums.Status;
 import com.revobank.repositories.AccountRepository;
+import com.revobank.specification.AccountSpecification;
 
 import lombok.AllArgsConstructor;
 
@@ -26,6 +30,8 @@ public class AccountService{
 	
 	private BalanceService balanceService;
 	
+	private AccountSpecification accountSpecification;
+		
 	@Transactional
 	public MessageResponseDTO createAccount(AccountDTO accountDTO) {			
 		Account entity = AccountMapper.toEntityOnCreate(accountDTO);		
@@ -47,6 +53,12 @@ public class AccountService{
 		List<Account> entities = accountRepository.findAll();		
 		return AccountMapper.toListDtoOnResponse(entities);		
 	}	
+	
+	@Transactional
+	public Page<AccountDTO> findAllPageable(AccountFilter filter, Pageable pageable) {
+		Page<Account> accountsPaged = this.accountRepository.findAll(this.accountSpecification.accounts(filter), pageable);
+        return accountsPaged.map(x -> AccountMapper.toDto(x));
+    }
 				
 	@Transactional(readOnly = true)
 	public AccountDTO findById(Long id) {

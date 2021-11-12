@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revobank.dto.AccountDTO;
 import com.revobank.dto.AccountUpdateDTO;
+import com.revobank.dto.filters.AccountFilter;
 import com.revobank.dto.response.MessageResponseDTO;
+import com.revobank.model.Account;
 import com.revobank.services.AccountService;
 
 import lombok.AllArgsConstructor;
@@ -55,5 +59,11 @@ public class AccountResource {
 		List<AccountDTO> allAccounts = accountService.getAllAccounts();
 		return ResponseEntity.ok().body(allAccounts);		
 	}
+	
+	@GetMapping("/search")
+    public  ResponseEntity<Page<AccountDTO>> findAll(AccountFilter filter, Pageable pageable) {
+		Page<AccountDTO> findAllPageable = this.accountService.findAllPageable(filter, pageable);
+        return ResponseEntity.ok().body(findAllPageable);        
+    }
 		
 }
