@@ -22,7 +22,6 @@ import com.revobank.dto.AccountDTO;
 import com.revobank.dto.AccountUpdateDTO;
 import com.revobank.dto.filters.AccountFilter;
 import com.revobank.dto.response.MessageResponseDTO;
-import com.revobank.model.Account;
 import com.revobank.services.AccountService;
 
 import lombok.AllArgsConstructor;
@@ -61,7 +60,7 @@ public class AccountResource {
 	}
 	
 	@GetMapping("/search")
-    public  ResponseEntity<Page<AccountDTO>> findAll(AccountFilter filter, Pageable pageable) {
+    public  ResponseEntity<Page<AccountDTO>> findAllPaged(AccountFilter filter, Pageable pageable) {
 		Page<AccountDTO> findAllPageable = this.accountService.findAllPageable(filter, pageable);
         return ResponseEntity.ok().body(findAllPageable);        
     }

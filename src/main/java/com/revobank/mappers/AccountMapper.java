@@ -71,27 +71,8 @@ public class AccountMapper {
 	
 	public static Account toUpdatedEntity(AccountUpdateDTO dto, Account entity) {
 		Account oldEntity = entity;	
-		
-//		String name = (dto.getName() != null) ? dto.getName() : oldEntity.getName();
 		LocalDate birthDate = (dto.getBirthDate() != null) ? stringToLocalDate(dto.getBirthDate()) : oldEntity.getBirthDate();
-//		JobTitle jobTitle = (dto.getJobTitle() != null) ? dto.getJobTitle() : oldEntity.getJobTitle();
-//		Status status = (dto.getStatus() != null) ? dto.getStatus() : oldEntity.getStatus();
-//		
-//		entity.setId(oldEntity.getId());
-//		entity.setDocument(oldEntity.getDocument());
-//		entity.setAccount(oldEntity.getAccount());
-//		entity.setAccountDigit(oldEntity.getAccountDigit());
-//		entity.setCreatedAt(oldEntity.getCreatedAt());
-//		entity.setUpdatedAt(Instant.now());
-//		entity.setName(name);
-//		entity.setBirthDate(birthDate);
-//		entity.setStatus(status);	
-//		entity.setJobTitle(jobTitle);
-						
-//		BeanUtils.copyProperties(dto, entity,
-//				"id", "document", "account", "accountDigit", "updatedAt", "createdAt");
-//	
-	
+
 		BeanUtils.copyProperties(dto, entity, getInvalidOrUnrequiredParameters(dto));
 	
 		entity.setUpdatedAt(Instant.now());	
@@ -108,13 +89,7 @@ public class AccountMapper {
 	
 	private static String[] getBlankPropertyNames(AccountUpdateDTO dto) {
 	    final BeanWrapper wrappedDto = new BeanWrapperImpl(dto);
-	   
-//	    return Stream.of(wrappedDto.getPropertyDescriptors())
-//	            .map(FeatureDescriptor -> FeatureDescriptor.getName())
-//	            .filter(propertyName -> 
-//	            			wrappedDto.getPropertyValue(propertyName) == null |
-//	            			wrappedDto.getPropertyValue(propertyName).equals(""))
-//	            .toArray(size -> new String[size]);	    
+    
 	    return Stream.of(wrappedDto.getPropertyDescriptors())
 			        .map(FeatureDescriptor::getName)
 			        .filter(propertyName -> 
@@ -122,20 +97,6 @@ public class AccountMapper {
 			        			wrappedDto.getPropertyValue(propertyName).equals(""))
 			        .toArray(String[]::new);
 	}
-	
-//	public static String[] getNullPropertyNames (AccountUpdateDTO dto) {
-//	    final BeanWrapper src = new BeanWrapperImpl(dto);
-//	    java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
-//
-//	    Set<String> emptyNames = new HashSet<String>();
-//	    for(java.beans.PropertyDescriptor pd : pds) {
-//	        Object srcValue = src.getPropertyValue(pd.getName());
-//	        if (srcValue == null) emptyNames.add(pd.getName());
-//	    }
-//
-//	    String[] result = new String[emptyNames.size()];
-//	    return emptyNames.toArray(result);
-//	}
 	
 	public static List<AccountDTO> toListDto(List<Account> entityList) {
 		return entityList.stream()
