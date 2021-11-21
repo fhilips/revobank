@@ -51,7 +51,7 @@ public class AccountResource {
 	public ResponseEntity<AccountDTO> findById(@PathVariable Long id) {
 		AccountDTO dto = this.accountService.findById(id);		 
 		return ResponseEntity.ok().body(dto);		
-	}
+	}	
 	
 	@GetMapping
 	public ResponseEntity<List<AccountDTO>> getAll() {
@@ -60,7 +60,7 @@ public class AccountResource {
 	}
 	
 	@GetMapping("/search")
-    public  ResponseEntity<Page<AccountDTO>> findAllPaged(AccountFilter filter, Pageable pageable) {
+    public ResponseEntity<Page<AccountDTO>> findAllPaged(AccountFilter filter, Pageable pageable) {
 		Page<AccountDTO> findAllPageable = this.accountService.findAllPageable(filter, pageable);
         return ResponseEntity.ok().body(findAllPageable);        
     }

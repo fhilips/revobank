@@ -27,9 +27,8 @@ public class BalanceService{
 	
 	@Transactional
 	public void createBalance(Account account) {
-		Balance entity = new Balance();	
-		
-		entity.setAccount(account);
+		Balance entity = new Balance();			
+		entity.setAccount(account);		
 		entity.setBalance(account.getJobTitle().getInicialBalance());
 		entity.setUpdatedAt(Instant.now());
 		balanceRepository.save(entity);
