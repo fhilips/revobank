@@ -4,9 +4,14 @@ import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.mapstruct.Mapper;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.revobank.dto.DebitDTO;
 import com.revobank.model.Balance;
 import com.revobank.model.Debit;
+
 
 public class DebitMapper {
 
@@ -18,7 +23,7 @@ public class DebitMapper {
 	}
 	
 	public static Debit toEntity(DebitDTO dto, Balance balanceEntity) {
-		return new Debit(dto.getAccountId(),
+		return new Debit(null,
 				dto.getAmount(),
 				Instant.now(),
 				balanceEntity);	
@@ -34,6 +39,5 @@ public class DebitMapper {
 	public static List<DebitDTO> toListDto(List<Debit> list) {
 		return list.stream().map(x -> DebitMapper.toDto(x)).collect(Collectors.toList());	
 	}
-
 	
 }

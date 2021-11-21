@@ -109,7 +109,6 @@ public class BalanceResourceTest {
 					.contentType(MediaType.APPLICATION_JSON));
 
 		result.andExpect(status().isOk());
-		result.andExpect(jsonPath("$.id").value("1"));
 		result.andExpect(jsonPath("$.balance").value(5000.0));				
 		
 	}

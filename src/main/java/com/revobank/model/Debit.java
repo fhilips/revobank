@@ -31,11 +31,10 @@ public class Debit implements Serializable {
 	@Positive
 	public Double amount;
 	public Instant createdAt;	
-	
-	
+		
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "balance_id")
 	public Balance balance;
 		
-	
+			
 }
