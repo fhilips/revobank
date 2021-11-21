@@ -24,7 +24,7 @@ import com.revobank.services.DebitService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(value = "balances")
+@RequestMapping(value = "v1/balances")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class BalanceResource {
 	
