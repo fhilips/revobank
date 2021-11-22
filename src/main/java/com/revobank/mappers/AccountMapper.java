@@ -14,10 +14,12 @@ import java.util.stream.Stream;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.data.domain.Page;
 
 import com.revobank.dto.AccountDTO;
 import com.revobank.dto.AccountUpdateDTO;
 import com.revobank.model.Account;
+import com.revobank.model.enums.Status;
 
 public class AccountMapper {
 	
@@ -51,7 +53,7 @@ public class AccountMapper {
 				dto.getDocument(),
 				stringToLocalDate(dto.getBirthDate()),				
 				dto.getJobTitle(),
-				dto.getStatus(),
+				Status.ACTIVE,
 				Instant.now(),
 				dto.getUpdatedAt()				
 				);
@@ -103,9 +105,9 @@ public class AccountMapper {
 				.map(x -> AccountMapper.toDto(x)).collect(Collectors.toList());
 	}
 
-	public static List<AccountDTO> toListDtoOnResponse(List<Account> entityList) {		
-		return entityList.stream()
-				.map(x -> AccountMapper.toDtoOnResponse(x)).collect(Collectors.toList());
+	public static Page<AccountDTO> toListDtoOnResponse(Page<Account> entityList) {		
+		return entityList
+				.map(x -> AccountMapper.toDtoOnResponse(x));
 	}		
 		
 	private static LocalDate stringToLocalDate(String date) {		

@@ -4,10 +4,6 @@ import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.mapstruct.Mapper;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.revobank.dto.DebitDTO;
 import com.revobank.model.Balance;
 import com.revobank.model.Debit;

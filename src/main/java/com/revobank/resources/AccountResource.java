@@ -54,14 +54,14 @@ public class AccountResource {
 	}	
 	
 	@GetMapping
-	public ResponseEntity<List<AccountDTO>> getAll() {
-		List<AccountDTO> allAccounts = accountService.getAllAccounts();
+	public ResponseEntity<Page<AccountDTO>> getAllPaged(Pageable page) {
+		Page<AccountDTO> allAccounts = accountService.getAllAccountsPaged(page);
 		return ResponseEntity.ok().body(allAccounts);		
 	}
 	
 	@GetMapping("/search")
-    public ResponseEntity<Page<AccountDTO>> findAllPaged(AccountFilter filter, Pageable pageable) {
-		Page<AccountDTO> findAllPageable = this.accountService.findAllPageable(filter, pageable);
+    public ResponseEntity<List<AccountDTO>> findAllPaged(AccountFilter filter) {
+		List<AccountDTO> findAllPageable = this.accountService.findAllPageable(filter);
         return ResponseEntity.ok().body(findAllPageable);        
     }
 		
