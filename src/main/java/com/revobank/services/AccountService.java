@@ -1,6 +1,7 @@
 package com.revobank.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -49,15 +50,15 @@ public class AccountService{
 	}
 		
 	@Transactional(readOnly = true)
-	public List<AccountDTO> getAllAccounts() {
-		List<Account> entities = accountRepository.findAll();		
+	public Page<AccountDTO> getAllAccountsPaged(Pageable page) {
+		Page<Account> entities = accountRepository.findAll(page);		
 		return AccountMapper.toListDtoOnResponse(entities);		
 	}	
 	
 	@Transactional
-	public Page<AccountDTO> findAllPageable(AccountFilter filter, Pageable pageable) {
-		Page<Account> accountsPaged = this.accountRepository.findAll(this.accountSpecification.accounts(filter), pageable);
-        return accountsPaged.map(x -> AccountMapper.toDto(x));
+	public List<AccountDTO> findAllPageable(AccountFilter filter) {
+		List<Account> accountsPaged = this.accountRepository.findAll(this.accountSpecification.accounts(filter));
+        return accountsPaged.stream().map(x -> AccountMapper.toDto(x)).collect(Collectors.toList());
     }
 				
 	@Transactional(readOnly = true)

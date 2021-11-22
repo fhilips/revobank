@@ -1,6 +1,5 @@
 package com.revobank.services.test;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -106,15 +105,5 @@ public class AccountServiceTests {
 		});	
 				
 	}
-	
-	@Test
-	public void getAllAccountsShouldNotReturnNull() {
 			
-		service.createAccount(accountDto);
-		service.createAccount(accountDto);
-		List<AccountDTO> allAccounts = service.getAllAccounts();
-		
-		Assertions.assertNotNull(allAccounts);		
-	}	
-		
 }
