@@ -27,7 +27,7 @@ import com.revobank.services.AccountService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(value = "accounts")
+@RequestMapping(value = "v1/accounts")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AccountResource {
 	
