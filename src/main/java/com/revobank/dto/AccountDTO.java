@@ -30,8 +30,7 @@ public class AccountDTO implements Serializable {
 	@NotNull(message = "The 'Birth Date' field is required.")
 	private String birthDate;
 	@NotNull(message = "The 'Job Title' field is required.")
-	private JobTitle jobTitle;
-	@NotNull(message = "The 'Status' field is required.")
+	private JobTitle jobTitle;	
 	private Status status;
 	private Instant createdAt;
 	private Instant updatedAt;
